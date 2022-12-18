@@ -22,7 +22,7 @@ export const HeroesRoutes = () => {
             element={<Search />}
           />
           <Route
-            path="hero"
+            path="hero/:id"
             element={<Hero />}
           />
           <Route

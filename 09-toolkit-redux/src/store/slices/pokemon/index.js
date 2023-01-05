@@ -1,0 +1,1 @@
+export { pokemonSlice } from './pokemonSlice';

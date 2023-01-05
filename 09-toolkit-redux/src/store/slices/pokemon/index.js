@@ -1,1 +1,2 @@
-export { pokemonSlice } from './pokemonSlice';
+export * from './pokemonSlice';
+export * from './thunks';

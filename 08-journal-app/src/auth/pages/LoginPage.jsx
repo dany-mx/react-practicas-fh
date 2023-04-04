@@ -2,11 +2,28 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Google } from '@mui/icons-material';
 import { Button, Grid, Link, TextField, Typography } from '@mui/material';
 import { AuthLayout } from '../layout/AuthLayout';
+import { useForm } from '../../hooks';
+import { useDispatch } from 'react-redux';
+import { checkingAuthentication, startGoogleSignIn } from '../../store/auth/thunks';
 
 export const LoginPage = () => {
+  const { email, password, handleChange } = useForm({ email: 'daniel@google.com', password: '123456' });
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(email, password);
+    dispatch(checkingAuthentication());
+  };
+
+  const handleGoogleSignIn = () => {
+    console.log('Google Sign In');
+    dispatch(startGoogleSignIn());
+  };
+
   return (
     <AuthLayout title="Login">
-      <form>
+      <form onSubmit={handleSubmit}>
         <Grid container>
           <Grid
             item
@@ -18,6 +35,9 @@ export const LoginPage = () => {
               type="email"
               placeholder="correo@test.com"
               fullWidth
+              name="email"
+              value={email}
+              onChange={handleChange}
             />
           </Grid>
           <Grid
@@ -30,6 +50,9 @@ export const LoginPage = () => {
               type="password"
               placeholder="password"
               fullWidth
+              name="password"
+              value={password}
+              onChange={handleChange}
             />
           </Grid>
 
@@ -44,6 +67,7 @@ export const LoginPage = () => {
               sm={6}
             >
               <Button
+                type="submit"
                 variant="contained"
                 fullWidth
               >
@@ -56,6 +80,7 @@ export const LoginPage = () => {
               sm={6}
             >
               <Button
+                onClick={handleGoogleSignIn}
                 variant="contained"
                 fullWidth
               >
